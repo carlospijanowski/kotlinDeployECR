@@ -1,17 +1,14 @@
 plugins {
-	id 'org.jetbrains.kotlin.jvm' version '1.9.25'
-	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.25'
-	id 'org.springframework.boot' version '3.4.2'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.boot' version '3.1.0' // Certifique-se de que está atualizado
+	id 'io.spring.dependency-management' version '1.1.2'
+	id 'java'
 }
 
 group = 'br.com.seteideias'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+	sourceCompatibility = '17'
 }
 
 repositories {
@@ -20,10 +17,19 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll '-Xjsr305=strict'
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+jar {
+	enabled = true // Garante que um `.jar` será gerado
+	archiveBaseName.set('app') // Define o nome do `.jar` como `app.jar`
+	archiveVersion.set('') // Remove a versão do nome do arquivo
+	archiveClassifier.set('') // Garante que não haverá sufixos extras
+	manifest {
+		attributes 'Main-Class': 'br.com.seteideias.kotlindeployecr.Application' // Certifique-se de que está correto
 	}
 }
