@@ -34,7 +34,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Criar build do projeto (Gerar JAR)
-        run: ./gradlew build --no-daemon
+        run: ./gradlew clean build --no-daemon
 
       - name: Verificar se o JAR foi gerado corretamente
         run: ls -lah build/libs/
@@ -45,6 +45,6 @@ jobs:
           ECR_REPOSITORY: kotlindeployecr
           IMAGE_TAG: latest
         run: |
-          docker build -t kotlindeployecr:latest .
+          docker build --no-cache -t kotlindeployecr:latest .
           docker tag kotlindeployecr:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
