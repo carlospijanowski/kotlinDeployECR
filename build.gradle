@@ -9,7 +9,13 @@ group = 'br.com.seteideias.kotlindeployecr'
 version = '1.0.0'
 
 java {
-	sourceCompatibility = '17'
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(17)) // Garante que o Java use a versão 17
+	}
+}
+
+kotlin {
+	jvmToolchain(17) // Garante que o Kotlin use a versão 17 também
 }
 
 repositories {
@@ -28,7 +34,7 @@ tasks.named('test') {
 }
 
 bootJar {
-	mainClass.set('br.com.seteideias.kotlindeployecr.KotlindeployecrApplication') // Define a classe principal correta
+	mainClass.set('br.com.seteideias.kotlindeployecr.KotlindeployecrApplication')
 }
 
 jar {
@@ -37,6 +43,6 @@ jar {
 	archiveVersion.set('')
 	archiveClassifier.set('')
 	manifest {
-		attributes 'Main-Class': 'br.com.seteideias.kotlindeployecr.KotlindeployecrApplication' // Define o manifest corretamente
+		attributes 'Main-Class': 'br.com.seteideias.kotlindeployecr.KotlindeployecrApplication'
 	}
 }
