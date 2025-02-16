@@ -36,6 +36,9 @@ jobs:
       - name: Criar build do projeto (Gerar JAR)
         run: ./gradlew build --no-daemon
 
+      - name: Verificar se o JAR foi gerado corretamente
+        run: ls -lah build/libs/
+
       - name: Construir e enviar a imagem para o ECR
         env:
           ECR_REGISTRY: 730335530459.dkr.ecr.us-east-1.amazonaws.com
