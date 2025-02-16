@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copia o JAR gerado pelo build do Gradle
-COPY build/libs/*.jar app.jar
+COPY build/libs/app.jar app.jar
 
 # Exposição da porta do serviço
 EXPOSE 8080

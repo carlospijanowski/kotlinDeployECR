@@ -39,6 +39,9 @@ jobs:
       - name: Verificar se o JAR foi gerado corretamente
         run: ls -lah build/libs/
 
+      - name: Renomear o JAR para um nome fixo
+        run: mv build/libs/*.jar build/libs/app.jar || echo "Nenhum arquivo JAR encontrado!"
+
       - name: Construir e enviar a imagem para o ECR
         env:
           ECR_REGISTRY: 730335530459.dkr.ecr.us-east-1.amazonaws.com
