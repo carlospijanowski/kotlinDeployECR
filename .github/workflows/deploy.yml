@@ -30,6 +30,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Dar permissão de execução ao Gradle
+        run: chmod +x gradlew
+
       - name: Criar build do projeto (Gerar JAR)
         run: ./gradlew build --no-daemon
 
