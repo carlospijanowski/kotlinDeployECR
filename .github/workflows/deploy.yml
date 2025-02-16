@@ -27,8 +27,14 @@ jobs:
       - name: Construir e enviar a imagem para o ECR
         env:
           ECR_REGISTRY: 730335530459.dkr.ecr.us-east-1.amazonaws.com
-          ECR_REPOSITORY: kotlindeployecr  # Certifique-se de que está em letras minúsculas
+          ECR_REPOSITORY: kotlindeployecr
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          # Construir a imagem localmente
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+
+          # Criar a tag correta apontando para o ECR
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+          # Fazer push da imagem para o ECR
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
