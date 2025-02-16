@@ -4,7 +4,7 @@ FROM openjdk:17-jdk-slim
 # Define o diretório de trabalho
 WORKDIR /app
 
-# Copia o JAR gerado pelo build
+# Copia o JAR gerado pelo build do Gradle
 COPY build/libs/*.jar app.jar
 
 # Exposição da porta do serviço
